@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Поиск
+{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            {% include 'components/shop/_sidebar.html' %}
+            <!-- Форма поиска -->
+            <!-- Результаты поиска -->
+            {% if products %}
+                <div class="row">
+                    {% for product in products %}
+                        <div class="col-lg-4 col-md-6 col-sm-12">
+                            <div class="single_product_item">
+                                <div class="single_product_item_thumb">
+                                    <img src="{{ product.get_first_photo }}" alt="{{ product.title }}"
+                                         class="img-fluid">
+                                </div>
+                                <h3><a href="{{ product.get_absolute_url }}">{{ product.title }}</a></h3>
+                                <div class="product_price_and_actions">
+                                    <p>Цена: {{ product.price }} ₽</p>
+                                    <!-- Кнопка "В избранное" -->
+                                    <form action="{% url 'add_to_favorites' product.id %}" method="post" class="d-inline">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-outline-primary">
+                                            В избранное
+                                        </button>
+                                    </form>
+                                    <!-- Кнопка "В корзину" -->
+                                    <form action="{{ product.add_to_cart }}" method="post" class="d-inline">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-outline-success">
+                                            В корзину
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>Продукты не найдены по запросу {{ query }}</p>
+            {% endif %}
+
+        </div>
+    </div>
+
+
+{% endblock %}

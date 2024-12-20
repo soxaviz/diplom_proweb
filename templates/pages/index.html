@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Главная страница
+{% endblock %}
+{% block content %}
+    <!-- product list start-->
+    {% include 'components/index/_product.html' %}
+    <!-- product list end-->
+
+    <!-- trending item start-->
+    {% include 'components/index/_trending.html' %}
+    <!-- trending item end-->
+
+    <!-- feature part here -->
+    {% include 'components/index/_feature.html' %}
+    <!-- feature part end -->
+
+{% endblock %}

@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="zxx">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>
+        {% block title %}
+
+        {% endblock %}
+    </title>
+    {% include 'components/_links.html' %}
+</head>
+
+<body>
+<!--::header part start::-->
+{% include 'components/_header.html' %}
+<!-- Header part end-->
+
+{% block content %}
+
+{% endblock %}
+
+<!--::footer_part start::-->
+{% include 'components/_footer.html' %}
+<!--::footer_part end::-->
+
+
+</body>
+
+</html>

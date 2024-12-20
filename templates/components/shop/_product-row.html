@@ -1,0 +1,29 @@
+{% load static %}
+<div class="product_list">
+    <div class="row">
+        {% for product in products %}
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4"> <!-- Adjust grid for responsiveness -->
+                <div class="single_product_item">
+                    <img src="{{ product.get_first_photo }}" alt="#" class="img-fluid">
+                    <h3><a href="{{ product.get_absolute_url }}">{{ product.title }}</a></h3>
+                    <p>${{ product.price }}</p>
+                    <!-- Кнопка "В избранное" -->
+                    <form action="{% url 'add_to_favorites' product.id %}" method="post" class="d-inline">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-outline-primary">
+                            В избранное
+                        </button>
+                    </form>
+                    <!-- Кнопка "В корзину" -->
+                    <form action="{{ product.add_to_cart }}" method="post" class="d-inline">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-outline-success">
+                            В корзину
+                        </button>
+                    </form>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+

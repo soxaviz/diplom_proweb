@@ -1,0 +1,42 @@
+{% load custom_tags %}
+{% get_categories_data as data %}
+
+
+
+<div class="product_sidebar">
+    <div class="single_sidebar">
+        <div class="single_sedebar">
+            <form action="{% url 'search' %}">
+                <input type="text" name="q" placeholder="Search Here" value="{{ query }}">
+                <i class="ti-search"></i>
+            </form>
+        </div>
+    </div>
+
+
+
+   <div class="single_sedebar">
+    <div class="select_option">
+        <div class="select_option_list">
+            Категории
+            <i class="right fas fa-caret-down"></i>
+        </div>
+        {% for key, val in data.items %}
+            <div class="select_option_dropdown">
+                <!-- Отображаем название категории -->
+                <p class="category-title">категория:{{ key }}</p> <!-- Это категория -->
+                <div class="subcategory-list">
+                    {% for subcat in val %}
+                        <!-- Отображаем подкатегории внутри категории -->
+                        <p><a href="{{ subcat.get_absolute_url }}">{{ subcat }}</a></p>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+</div>
+
+
